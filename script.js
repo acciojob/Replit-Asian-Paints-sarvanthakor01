@@ -1,30 +1,35 @@
 //your JS code here. If required.
-document.getElementById('change_button').addEventListener('click', function() {
-    // Get the block ID and color from the input fields
-    const blockId = document.getElementById('block_id').value;
-    const color = document.getElementById('colour_id').value;
+document.addEventListener("DOMContentLoaded", function () {
+    const changeButton = document.getElementById("change_button");
+    const resetButton = document.getElementById("reset");
 
-    // Reset all grid items to transparent
-    const gridItems = document.querySelectorAll('.grid-item');
-    gridItems.forEach(item => {
-        item.style.backgroundColor = 'transparent';
+    changeButton.addEventListener("click", function () {
+        // Reset all grid item backgrounds to transparent
+        document.querySelectorAll(".grid-item").forEach(item => {
+            item.style.backgroundColor = "transparent";
+        });
+
+        // Get input values
+        const blockId = document.getElementById("block_id").value;
+        const color = document.getElementById("colour_id").value.trim();
+
+        // Validate block ID (should be between 1 and 9)
+        const block = document.getElementById(blockId);
+        if (block && blockId >= 1 && blockId <= 9) {
+            block.style.backgroundColor = color;
+        } else {
+            alert("Please enter a valid Block ID (1-9)");
+        }
     });
 
-    // Change the background color of the specified grid item
-    const selectedItem = document.getElementById(blockId);
-    if (selectedItem) {
-        selectedItem.style.backgroundColor = color;
-    } else {
-        alert('Invalid Block ID. Please enter a number between 1 and 9.');
-    }
-});
+    resetButton.addEventListener("click", function () {
+        // Reset all grid item backgrounds to transparent
+        document.querySelectorAll(".grid-item").forEach(item => {
+            item.style.backgroundColor = "transparent";
+        });
 
-// Reset button functionality
-document.getElementById('reset_button').addEventListener('click', function() {
-    const gridItems = document.querySelectorAll('.grid-item');
-    gridItems.forEach(item => {
-        item.style.backgroundColor = 'transparent';
+        // Clear input fields
+        document.getElementById("block_id").value = "";
+        document.getElementById("colour_id").value = "";
     });
-    document.getElementById('block_id').value = '';
-    document.getElementById('colour_id').value = '';
 });
